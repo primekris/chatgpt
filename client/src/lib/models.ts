@@ -9,14 +9,15 @@ export const availableModels: ModelConfig[] = [
     enabled: true,
     comingSoon: false,
   },
-  {
-    id: "gpt-4-turbo",
-    name: "GPT-4 Turbo",
-    description: "Advanced reasoning model",
-    provider: "OpenAI",
-    enabled: false,
-    comingSoon: true,
-  },
+ {
+  id: "gemini-2.0-flash",
+  name: "Gemini 2.0 Flash",
+  description: "Google Gemini • Fast and powerful",
+  provider: "Google",
+  enabled: true,
+  comingSoon: false,
+},
+
   {
     id: "claude-3-opus",
     name: "Claude 3 Opus",
