@@ -168,6 +168,12 @@ export class AIService {
       return provider;
     }
 
+    if (modelId.startsWith("gemini-")) {
+  const provider = this.providers.get("gemini");
+  if (!provider) throw new Error("Gemini not initialized");
+  return provider;
+}
+
     // Add routing for other providers:
     // if (modelId.startsWith("gpt-")) {
     //   const provider = this.providers.get("openai");
