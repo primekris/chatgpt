@@ -76,7 +76,8 @@ export function ChatHeader({
           </PopoverContent>
         </Popover>
         <SystemPromptEditor
-          systemPrompt={systemPrompt}
+          /* {systemPrompt={systemPrompt} } */
+        {systemPrompt={ActMode} }
           onSave={onSystemPromptChange}
         />
       </div>
