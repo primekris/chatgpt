@@ -7,13 +7,14 @@ export interface PromptTemplate {
 }
 
 export const promptTemplates: PromptTemplate[] = [
-  {
-    id: "email-writer",
-    title: "Email Writer",
-    description: "Compose professional emails",
-    icon: "Mail",
-    prompt: "Write a professional email about: ",
-  },
+ {
+  id: "ask-anything",
+  title: "Ask Anything",
+  description: "Start chatting with a friendly hello",
+  icon: "Smile",
+  prompt: "Hello! What would you like to ask?\n\n",
+},
+
   {
     id: "code-explainer",
     title: "Code Explainer",
