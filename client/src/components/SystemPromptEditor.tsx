@@ -41,12 +41,12 @@ export function SystemPromptEditor({ systemPrompt, onSave }: SystemPromptEditorP
           className="gap-2"
         >
           <Settings className="h-4 w-4" />
-         System Prompt
+         Act Mode
         </Button>
       </SheetTrigger>
       <SheetContent className="w-full sm:max-w-xl overflow-y-auto">
         <SheetHeader>
-          <SheetTitle>System Prompt</SheetTitle>
+          <SheetTitle>Act Mode - System Prompt</SheetTitle>
         </SheetHeader>
         <div className="mt-6 space-y-6">
           <div className="space-y-2">
