@@ -41,7 +41,7 @@ export function SystemPromptEditor({ systemPrompt, onSave }: SystemPromptEditorP
           className="gap-2"
         >
           <Settings className="h-4 w-4" />
-          Act Mode
+         System Prompt
         </Button>
       </SheetTrigger>
       <SheetContent className="w-full sm:max-w-xl overflow-y-auto">
