@@ -147,6 +147,10 @@ export class AIService {
       this.providers.set("together", new TogetherAIProvider(togetherApiKey));
     }
 
+     const geminiKey = process.env.GEMINI_API_KEY;
+  if (geminiKey) {
+    this.providers.set("gemini", new GeminiProvider(geminiKey));
+  }
     // Add more providers here following the same pattern:
     // const openaiApiKey = process.env.OPENAI_API_KEY;
     // if (openaiApiKey) {
