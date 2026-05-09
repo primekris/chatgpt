@@ -84,51 +84,52 @@ class TogetherAIProvider implements AIProvider {
 class GeminiProvider implements AIProvider {
   name = "Google Gemini";
   private apiKey: string;
-  private baseUrl =
-    "https://generativelanguage.googleapis.com/v1beta/models";
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;
   }
 
   async *streamChat(request: ChatRequest): AsyncGenerator<string> {
-    const url = `${this.baseUrl}/${request.model}:generateContent?key=${this.apiKey}`;
-
-    const body = {
-      contents: [
-        {
-          parts: [{ text: request.messages[request.messages.length - 1].content }],
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${request.model}:generateContent?key=${this.apiKey}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      ],
-      generationConfig: {
-        temperature: request.temperature,
-      },
-    };
-
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+        body: JSON.stringify({
+          contents: request.messages.map((msg) => ({
+            role: msg.role === "assistant" ? "model" : "user",
+            parts: [{ text: msg.content }],
+          })),
+          generationConfig: {
+            temperature: request.temperature || 0.7,
+            maxOutputTokens: 2048,
+          },
+        }),
+      }
+    );
 
     if (!response.ok) {
-      throw new Error(`Gemini API Error: ${response.status}`);
+      const error = await response.text();
+      throw new Error(
+        `Gemini API Error: ${response.status} - ${error}`
+      );
     }
 
     const json = await response.json();
 
     const text =
-      json?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+      json?.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
-    // Gemini does not support streaming, so simulate
+    // fake streaming
     for (const char of text) {
       yield char;
-      await new Promise((r) => setTimeout(r, 3));
+      await new Promise((r) => setTimeout(r, 2));
     }
   }
 }
+
 
 // Extensible pattern for adding new AI providers
 // To add a new model provider:
